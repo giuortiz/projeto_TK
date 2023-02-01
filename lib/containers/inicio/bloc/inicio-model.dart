@@ -1,7 +1,10 @@
 class InicioModel {
-  InicioModel();
+  List<String>? listaItensDrawer;
 
-  InicioModel patchState() {
-    return InicioModel();
+  InicioModel({this.listaItensDrawer});
+
+  InicioModel patchState(List<String>? listaItensDrawer) {
+    return InicioModel(
+        listaItensDrawer: listaItensDrawer ?? this.listaItensDrawer);
   }
 }
