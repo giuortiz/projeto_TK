@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:projeto_tokio_marine/containers/inicio/components/tela-inicial.dart';
 import '../bloc/login-cubit.dart';
 import '../bloc/login-model.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -35,25 +38,27 @@ class _TelaLoginState extends State<TelaLogin> {
   Widget _buildBody(BuildContext context, state) {
     return Stack(
       children: [
-        Column(children: [
-          Container(
-            height: MediaQuery.of(context).size.height / 2,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xff2bbab4),
-                Colors.yellow,
-              ],
-            )),
-          ),
-          Container(
+        SingleChildScrollView(
+          child: Column(children: [
+            Container(
               height: MediaQuery.of(context).size.height / 2,
               width: double.infinity,
-              color: const Color(0xff292929)),
-        ]),
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xff2bbab4),
+                  Colors.yellow,
+                ],
+              )),
+            ),
+            Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: double.infinity,
+                color: const Color(0xff292929)),
+          ]),
+        ),
         SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -82,9 +87,35 @@ class _TelaLoginState extends State<TelaLogin> {
                   child: const Text(
                     "Aqui você gerencia seus seguros e de seus familiares em poucos cliques!",
                     style: TextStyle(color: Colors.white),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 _buildLoginCard(),
+                Image.asset("assets/logo-tokio-marine-seguradora-256.png",
+                    width: (kIsWeb) ? 200 : 100,
+                    color: Colors.white,
+                    fit: BoxFit.cover),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  child: const Text("Acesse através das redes sociais",
+                      style: TextStyle(color: Colors.white)),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SignInButton(
+                      Buttons.Facebook,
+                      mini: true,
+                      onPressed: () {},
+                    ),
+                    Divider(),
+                    SignInButton(
+                      Buttons.Twitter,
+                      mini: true,
+                      onPressed: () {},
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -131,6 +162,8 @@ class _TelaLoginState extends State<TelaLogin> {
                     margin: const EdgeInsets.only(top: 16),
                     child: TextField(
                       controller: _emailController,
+                      style: const TextStyle(color: Colors.white),
+                      textAlign: TextAlign.center,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30.0),
@@ -144,6 +177,9 @@ class _TelaLoginState extends State<TelaLogin> {
                   Container(
                     margin: const EdgeInsets.only(top: 8),
                     child: TextField(
+                      style: const TextStyle(color: Colors.white),
+                      textAlign: TextAlign.center,
+                      obscureText: true,
                       controller: _senhaController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -206,9 +242,15 @@ class _TelaLoginState extends State<TelaLogin> {
                   ],
                 )),
             child: FloatingActionButton(
-              onPressed: () {
-                _bloc.authenticate(
+              onPressed: () async {
+                bool loggedIn = await _bloc.authenticate(
                     _emailController.text, _senhaController.text);
+                if (loggedIn) {
+                  var push = Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TelaInicial()));
+                }
               },
               child: const Icon(
                 Icons.arrow_forward_sharp,

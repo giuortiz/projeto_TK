@@ -1,17 +1,7 @@
 # projeto_tokio_marine
 
-A new Flutter project.
+Projeto feito na versão 3.3.10 do Flutter, com suporte a Android e Web com authenticação pelo Firebase
+ (Usuário base para Login é giu.oortiz@gmail.com senha 094430, pois ainda não foi implementada
+ a parte de cadastro via app).
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# projeto_TK" 
+Alguns icones e textos diferentes do original por não ter encontrado os icones e por não ter conseguido entender alguns textos.3

@@ -8,8 +8,9 @@ class LoginCubit extends Cubit<LoginModel> {
 
   ITokioMarineService? _service;
 
-  Future<void> authenticate(String email, String senha) async {
+  Future<bool> authenticate(String email, String senha) async {
     _service = TokioMarineService();
     var res = await _service!.Authentication(email, senha);
+    return res;
   }
 }

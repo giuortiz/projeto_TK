@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.giuliano.projeto_tokio_marine.projeto_tokio_marine">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="projeto_tokio_marine"
         android:name="${applicationName}"

@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_tokio_marine/containers/inicio/components/webview.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../bloc/inicio-cubit.dart';
 import '../bloc/inicio-model.dart';
 
@@ -104,11 +107,14 @@ class _TelaInicialState extends State<TelaInicial> {
         Column(
           children: _buildListDrawerItens(),
         ),
-        const ListTile(
-            leading: Text(
-          "Sair",
-          style: TextStyle(color: Color(0xff2bbab4)),
-        )),
+        ListTile(
+            onTap: () {
+              Navigator.of(context).pop();
+            },
+            leading: const Text(
+              "Sair",
+              style: TextStyle(color: Color(0xff2bbab4)),
+            )),
         Container(
           alignment: Alignment.center,
           height: 100,
@@ -195,7 +201,8 @@ class _TelaInicialState extends State<TelaInicial> {
                             "Caio Maximo",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white, fontSize: 18),
+                                color: Colors.white,
+                                fontSize: 18),
                           ),
                         )
                       ]),
@@ -215,7 +222,10 @@ class _TelaInicialState extends State<TelaInicial> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildCardMenu(Icons.car_rental, "Automóvel"),
+                  _buildCardMenu(Icons.car_rental, "Automóvel",
+                      onTap: () async {
+                    _bloc.openMenu(context);
+                  }),
                   _buildCardMenu(Icons.house, "Residência"),
                   _buildCardMenu(Icons.monitor_heart_sharp, "Vida"),
                   _buildCardMenu(Icons.accessible, "Acidentes Pessoais"),
@@ -231,31 +241,34 @@ class _TelaInicialState extends State<TelaInicial> {
     );
   }
 
-  Widget _buildCardMenu(IconData icon, String title) {
-    return Container(
-      margin: const EdgeInsets.only(right: 4),
-      width: 80,
-      height: 80,
-      padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        color: const Color(0xff4e4e4e),
-        borderRadius: BorderRadius.circular(6),
+  Widget _buildCardMenu(IconData icon, String title, {var onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(right: 4),
+        width: 80,
+        height: 80,
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: const Color(0xff4e4e4e),
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: const Color(0xff2bbab4),
+                size: 40,
+              ),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white, fontSize: 10),
+              )
+            ]),
       ),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: const Color(0xff2bbab4),
-              size: 40,
-            ),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white, fontSize: 10),
-            )
-          ]),
     );
   }
 
