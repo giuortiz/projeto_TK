@@ -13,6 +13,8 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   final LoginCubit _bloc = LoginCubit(LoginModel());
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +105,7 @@ class _TelaLoginState extends State<TelaLogin> {
             elevation: 4,
             color: const Color(0xff292929),
             child: Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(28),
               child: Column(
                 children: [
                   Container(
@@ -128,19 +130,21 @@ class _TelaLoginState extends State<TelaLogin> {
                   Container(
                     margin: const EdgeInsets.only(top: 16),
                     child: TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30.0),
                           ),
                           filled: true,
                           hintStyle: const TextStyle(color: Colors.white),
-                          hintText: "CPF",
+                          hintText: "Email",
                           fillColor: const Color(0xff292929)),
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 8),
                     child: TextField(
+                      controller: _senhaController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30.0),
@@ -201,9 +205,12 @@ class _TelaLoginState extends State<TelaLogin> {
                     Colors.yellow,
                   ],
                 )),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
+            child: FloatingActionButton(
+              onPressed: () {
+                _bloc.authenticate(
+                    _emailController.text, _senhaController.text);
+              },
+              child: const Icon(
                 Icons.arrow_forward_sharp,
                 color: Colors.white,
                 size: 30,

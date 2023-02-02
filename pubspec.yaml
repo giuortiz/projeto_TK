@@ -39,6 +39,7 @@ dependencies:
   http: ^0.13.5
   flutter_bloc: ^7.0.1
   searchbar_animation: ^0.0.4
+  firebase_core:
 
 dev_dependencies:
   flutter_test:

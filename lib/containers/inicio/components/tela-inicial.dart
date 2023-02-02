@@ -109,6 +109,35 @@ class _TelaInicialState extends State<TelaInicial> {
           "Sair",
           style: TextStyle(color: Color(0xff2bbab4)),
         )),
+        Container(
+          alignment: Alignment.center,
+          height: 100,
+          decoration: const BoxDecoration(
+              gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff2bbab4),
+              Colors.yellow,
+            ],
+          )),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                margin: const EdgeInsets.only(right: 4),
+                width: 42,
+                height: 42,
+                decoration: const BoxDecoration(
+                    shape: BoxShape.circle, color: Colors.grey)),
+            Container(
+              margin: const EdgeInsets.only(top: 4, left: 16, right: 16),
+              child: const Text(
+                "Dúvidas?\nConverse agora mesmo e tire sua dúvidas",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white),
+              ),
+            )
+          ]),
+        )
       ]),
     );
   }
@@ -133,18 +162,45 @@ class _TelaInicialState extends State<TelaInicial> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 70,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xff2bbab4),
-                Colors.yellow,
-              ],
-            )),
-          ),
+              height: 70,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xff2bbab4),
+                  Colors.yellow,
+                ],
+              )),
+              child: Row(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(right: 12, left: 32),
+                      width: 50,
+                      height: 50,
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.grey)),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Bem-vindo",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: const Text(
+                            "Caio Maximo",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white, fontSize: 18),
+                          ),
+                        )
+                      ]),
+                ],
+              )),
           Container(
             margin: const EdgeInsets.only(left: 32, top: 32, bottom: 8),
             child: const Text("Cotar e Contratar",
